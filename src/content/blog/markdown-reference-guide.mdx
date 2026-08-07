@@ -1,0 +1,310 @@
+---
+title: "Markdown Reference & Frontmatter Guide"
+publishedAt: "2026-07-29"
+updatedAt: "2026-07-29"
+author: "Jules DiPrima"
+summary: "A comprehensive reference for markdown syntax and frontmatter fields used on this site, with examples drawn from GRC and project management workflows."
+image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&h=192&fit=crop"
+---
+
+This post serves as both a reference for markdown syntax and a demonstration of the frontmatter fields available on this site. All examples use GRC (Governance, Risk, and Compliance) and project management scenarios.
+
+---
+
+## Frontmatter
+
+Every post begins with a YAML frontmatter block between `---` delimiters:
+
+```yaml
+---
+title: "Your Post Title"
+publishedAt: "2026-07-29"
+updatedAt: "2026-07-29"
+author: "Jules DiPrima"
+summary: "A short description for previews and SEO."
+image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&h=192&fit=crop"
+---
+```
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `title` | Yes | Post title displayed on the page and in listings |
+| `publishedAt` | Yes | Publication date in `YYYY-MM-DD` format |
+| `updatedAt` | No | Last revision date in `YYYY-MM-DD` format |
+| `author` | No | Author name (defaults to site name) |
+| `summary` | Yes | Short description used in meta tags and blog index cards |
+| `image` | No | Hero image URL shown on the post page and in social share cards |
+
+---
+
+## Headings
+
+Use `#` through `######` for heading levels.
+
+```markdown
+# Heading 1 — Page Title
+## Heading 2 — Section
+### Heading 3 — Subsection
+#### Heading 4 — Group
+##### Heading 5 — Subgroup
+###### Heading 6 — Label
+```
+
+## Heading 2 — Section
+
+### Heading 3 — Subsection
+
+#### Heading 4 — Group
+
+##### Heading 5 — Subgroup
+
+###### Heading 6 — Label
+
+---
+
+## Text Formatting
+
+| Style | Syntax | Example |
+|-------|--------|---------|
+| Bold | `**text**` or `__text__` | **NIST SP 800-53 Rev. 5** |
+| Italic | `*text*` or `_text_` | *Continuous Authorization to Operate* |
+| Bold + Italic | `***text***` | ***FedRAMP Moderate Baseline*** |
+| Strikethrough | `~~text~~` | ~~legacy ATO process~~ |
+| Inline code | `` `code` `` | `POA&M` |
+| Link | `[text](url)` | [NIST CSF](https://www.nist.gov/cyberframework) |
+
+---
+
+## Blockquotes
+
+Use `>` for blockquotes, including nested ones:
+
+```markdown
+> The POA&M must be reviewed and updated within 30 days of any significant change to the system boundary.
+>
+> > This includes changes to network architecture, data flows, and interconnected systems.
+>
+> Evidence of review must be maintained for audit purposes.
+```
+
+> The POA&M must be reviewed and updated within 30 days of any significant change to the system boundary.
+>
+> > This includes changes to network architecture, data flows, and interconnected systems.
+>
+> Evidence of review must be maintained for audit purposes.
+
+---
+
+## Lists
+
+### Unordered
+
+```markdown
+- NIST SP 800-53 Rev. 5 control families
+  - Access Control (AC)
+  - Audit and Accountability (AU)
+  - Configuration Management (CM)
+  - Contingency Planning (CP)
+- FedRAMP baseline overlays
+- Agency-specific tailoring
+```
+
+- NIST SP 800-53 Rev. 5 control families
+  - Access Control (AC)
+  - Audit and Accountability (AU)
+  - Configuration Management (CM)
+  - Contingency Planning (CP)
+- FedRAMP baseline overlays
+- Agency-specific tailoring
+
+### Ordered
+
+```markdown
+1. Define system boundary and categorize data
+2. Select applicable controls from the baseline
+3. Implement controls and document evidence
+4. Assess control effectiveness
+5. Authorize system operation
+6. Monitor continuously
+```
+
+1. Define system boundary and categorize data
+2. Select applicable controls from the baseline
+3. Implement controls and document evidence
+4. Assess control effectiveness
+5. Authorize system operation
+6. Monitor continuously
+
+### Task Lists
+
+```markdown
+- [x] Complete gap assessment
+- [x] Draft System Security Plan (SSP)
+- [ ] Implement AU-3 audit logging
+- [ ] Conduct annual control testing
+- [ ] Submit authorization package
+```
+
+- [x] Complete gap assessment
+- [x] Draft System Security Plan (SSP)
+- [ ] Implement AU-3 audit logging
+- [ ] Conduct annual control testing
+- [ ] Submit authorization package
+
+---
+
+## Code Blocks
+
+Specify a language for syntax highlighting:
+
+````markdown
+```json
+{
+  "controlId": "AU-3",
+  "controlName": "Content of Audit Records",
+  "implementationStatus": "implemented",
+  "assessmentResult": "pass",
+  "evidence": "s3://audit-logs/uspto-cato/au-3/"
+}
+```
+````
+
+```json
+{
+  "controlId": "AU-3",
+  "controlName": "Content of Audit Records",
+  "implementationStatus": "implemented",
+  "assessmentResult": "pass",
+  "evidence": "s3://audit-logs/uspto-cato/au-3/"
+}
+```
+
+You can also add a title:
+
+````markdown
+```yaml title=".github/workflows/control-assessment.yml"
+name: Automated Control Assessment
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+jobs:
+  assess:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: aws audit-manager start-assessment-report
+```
+````
+
+```yaml title=".github/workflows/control-assessment.yml"
+name: Automated Control Assessment
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+jobs:
+  assess:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: aws audit-manager start-assessment-report
+```
+
+---
+
+## Tables
+
+```markdown
+| Control ID | Control Name | Status | Owner | Due Date |
+|------------|-------------|--------|-------|----------|
+| AC-1 | Access Control Policy | Implemented | ISSO | N/A |
+| AU-4 | Audit Storage Capacity | In Progress | SysAdmin | 2026-09-01 |
+| CM-2 | Baseline Configuration | Implemented | DevOps | N/A |
+| CP-7 | Alternate Processing Site | Not Started | PM | 2026-12-01 |
+| IR-4 | Incident Handling | Implemented | SOC | N/A |
+```
+
+| Control ID | Control Name | Status | Owner | Due Date |
+|------------|-------------|--------|-------|----------|
+| AC-1 | Access Control Policy | Implemented | ISSO | N/A |
+| AU-4 | Audit Storage Capacity | In Progress | SysAdmin | 2026-09-01 |
+| CM-2 | Baseline Configuration | Implemented | DevOps | N/A |
+| CP-7 | Alternate Processing Site | Not Started | PM | 2026-12-01 |
+| IR-4 | Incident Handling | Implemented | SOC | N/A |
+
+---
+
+## Horizontal Rules
+
+Use three or more dashes, asterisks, or underscores:
+
+```markdown
+---
+```
+
+---
+
+## Images
+
+```markdown
+![GRC Framework Diagram](https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?w=600&h=400&fit=crop "Security compliance overview diagram")
+```
+
+![GRC Framework Diagram](https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?w=600&h=400&fit=crop "Security compliance overview diagram")
+
+---
+
+## GRC Project Management Example
+
+Below is a sample RACI matrix for a cATO implementation project:
+
+| Task | PM | RMF SME | Security Engineer | Authorizing Official |
+|------|----|---------|-------------------|---------------------|
+| Define system boundary | A | R | C | I |
+| Select controls | C | R | C | I |
+| Implement control CM-2 | I | C | R | I |
+| Conduct assessment | C | C | R | A |
+| Draft authorization letter | C | C | I | R |
+| Continuous monitoring | I | A | R | I |
+
+- **R** = Responsible (does the work)
+- **A** = Accountable (signs off)
+- **C** = Consulted (provides input)
+- **I** = Informed (kept up to date)
+
+---
+
+## Inline HTML
+
+You can embed raw HTML when markdown syntax is not enough:
+
+```html
+<details>
+<summary>Click to expand the milestone schedule</summary>
+
+- **Week 1:** Kickoff and system boundary scoping
+- **Week 2–3:** Control selection and tailoring
+- **Week 4–6:** Implementation and evidence collection
+- **Week 7–8:** Assessment and remediation
+- **Week 9:** Authorization package submission
+
+</details>
+```
+
+<details>
+<summary>Click to expand the milestone schedule</summary>
+
+- **Week 1:** Kickoff and system boundary scoping
+- **Week 2–3:** Control selection and tailoring
+- **Week 4–6:** Implementation and evidence collection
+- **Week 7–8:** Assessment and remediation
+- **Week 9:** Authorization package submission
+
+</details>
+
+---
+
+This guide covers the markdown features used throughout this blog. When in doubt, refer back here for syntax examples.

@@ -74,7 +74,11 @@ const sectionComponents: Record<string, React.ReactNode> = {
                   </div>
                 </div>
                 <div className="flex items-center gap-1 text-xs tabular-nums text-muted-foreground text-right flex-none">
-                  <span>{education.start} - {education.end}</span>
+                  <span>
+                    {education.start === education.end
+                      ? education.start
+                      : `${education.start} - ${education.end}`}
+                  </span>
                 </div>
               </a>
             </BlurFade>
